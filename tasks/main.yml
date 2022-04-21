@@ -121,7 +121,7 @@
         minute: "{{ borgmatic_cron_minute }}"
         user: "root"
         cron_file: "{{ borgmatic_cron_name }}"
-        job: "borgmatic -c /etc/borgmatic/{{ borgmatic_config_name }} --create --prune"
+        job: "borgmatic -c /etc/borgmatic/{{ borgmatic_config_name }} --create --prune --stats"
     - name: Add cron job for infrequent checks
       cron:
         name: "{{ borgmatic_cron_name }}-check"
@@ -142,7 +142,7 @@
         minute: "{{ borgmatic_cron_minute }}"
         user: "root"
         cron_file: "{{ borgmatic_cron_name }}"
-        job: "borgmatic -c /etc/borgmatic/{{ borgmatic_config_name }}"
+        job: "borgmatic -c /etc/borgmatic/{{ borgmatic_config_name }} --stats"
     - name: Ensure separate check cron job is absent
       cron:
         name: "{{ borgmatic_cron_name }}-check"
