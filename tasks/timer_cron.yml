@@ -26,4 +26,22 @@
     name: PATH
     env: true
     value: /usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+- name: Set MAILFROM for borgmatic cron job
+  ansible.builtin.cron:
+    user: "{{ _borgbackup_user.name }}"
+    cron_file: "{{ _borgbackup_timer.name }}"
+    name: MAILFROM
+    env: yes
+    value: "{{ _borgbackup_timer.cron_smtp_from }}"
+  when: "_borgbackup_timer.cron_smtp_from is defined"
+
+- name: Set MAILTO for borgmatic cron job
+  ansible.builtin.cron:
+    user: "{{ _borgbackup_user.name }}"
+    cron_file: "{{ _borgbackup_timer.name }}"
+    name: MAILTO
+    env: yes
+    value: "{{ _borgbackup_timer.cron_smtp_to }}"
+  when: "_borgbackup_timer.cron_smtp_to is defined"
 ...

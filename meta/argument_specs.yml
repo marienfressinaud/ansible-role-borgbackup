@@ -305,4 +305,12 @@ argument_specs:
             required: false
             default: "yes"
             description: Value for the systemd NoNewPrivileges setting.
+          cron_smtp_from:
+            type: str
+            required: false
+            description: Email used as "From" header when sending email notification via cron
+          cron_smtp_to:
+            type: str
+            required: false
+            description: Email used as "To" header when sending email notification via cron
 ...
